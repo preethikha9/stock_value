@@ -26,6 +26,6 @@ jobs:
           docker push preethikha9/flask-stock-app:latest
 
       - name: Deploy to Kubernetes
-        uses: appleboy/kubectl@master
+        uses: appleboy/kubectl-action@v0.9.2
         with:
           args: apply -f deployment.yaml
