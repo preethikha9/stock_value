@@ -58,9 +58,7 @@ jobs:
       # Configure kubectl
       - name: Configure kubectl
         run: |
-          echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig
-          mkdir -p ~/.kube
-          mv kubeconfig ~/.kube/config
+          kubectl get nodes
 
       # Deploy to Kubernetes
       - name: Deploy to Kubernetes
