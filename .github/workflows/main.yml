@@ -38,5 +38,5 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
-              kubectl create -f deployment.yaml --dry-run=client -o yaml | kubectl apply --validate=false -f -
+              kubectl apply -f deployment.yaml --validate=false
 
