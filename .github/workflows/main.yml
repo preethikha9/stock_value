@@ -40,5 +40,6 @@ jobs:
         run: |
               ls
               pwd
+              kubectl version
               kubectl apply -f deployment.yaml --validate=false
 
