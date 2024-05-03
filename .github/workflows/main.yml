@@ -1,0 +1,31 @@
+name: Continuous Delivery
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Push Docker image
+        run: |
+          docker pull preethikha9/flask-stock-app:latest || true
+          docker build -t preethikha9/flask-stock-app:latest .
+          docker push preethikha9/flask-stock-app:latest
+
+      - name: Deploy to Kubernetes
+        uses: appleboy/kubectl@master
+        with:
+          args: apply -f deployment.yaml
